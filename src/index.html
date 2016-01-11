@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html ng-app="<%=appName%>" ng-controller="AppController">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title ng-bind="pageTitle"></title>
+
+    <!-- font awesome from BootstrapCDN -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+    <!-- compiled CSS --><% styles.forEach( function ( file ) { %>
+    <link rel="stylesheet" type="text/css" href="<%= file %>" /><% }); %>
+
+    <!-- compiled JavaScript -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <% scripts.forEach( function ( file ) { %>
+    <script type="text/javascript" src="<%= file %>"></script><% }); %>
+    <script type="text/javascript">
+			$(document).ready(function() {
+				$('#fullpage').fullpage({
+					anchors: ['top', 'details', 'admin', 'play'],
+                    sectionsColor: ['rgba(0,0,0,0.2)', 'rgba(215,20,0,.7)', '#1BBC9B', 'rgba(0,191,243,0.5)'],
+					menu: '#menu',
+					scrollingSpeed: 2000,
+                    responsiveWidth: 900,
+                    navigation: true,
+				    navigationPosition: 'right'
+				});
+			});
+		</script>
+        <script type="text/javascript" $(window).stellar();></script>
+		<base href="/">
+</head>
+<body>
+    		<header style="display:none;">
+			<nav ng-controller="NavController" class="navbar navbar-default">
+				<div class="container-fluid">
+					<!-- Brand and toggle get grouped for better mobile display -->
+					<div class="navbar-header">
+						<button type="button" ng-init="isCollapsed = true" class="navbar-toggle" ng-click="isCollapsed = !isCollapsed">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+						<a class="navbar-brand" href="#">svend knutsen</a>
+					</div>
+					
+					<!-- Collect the nav links, forms, and other content for toggling -->
+					<div collapse="isCollapsed" class="navbar-collapse" ng-class="isCollapsed ? 'collapse' : 'in'">
+						<ul class="nav navbar-nav">
+							<li data-menuanchor="firstPage" ui-sref-active="active">
+								<a ui-sref="home" ng-click="isCollapsed = !isCollapsed">Home</a>
+							</li>
+							<li data-menuanchor="secondPage" ui-sref-active="active">
+								<a href="#skills" ng-click="isCollapsed = !isCollapsed">Skills</a>
+							</li>
+							<li data-menuanchor="3rdPage" ui-sref-active="active" ng-click="isCollapsed = !isCollapsed">
+								<a href="#contactme">Contact Me</a>
+							</li>
+						</ul>
+					</div><!-- /.navbar-collapse -->
+				</div><!-- /.container-fluid -->
+			</nav>
+		</header>
+		<div id="fullpage" ui-view="main"></div>
+
+    <footer class="container">
+        (c) <%= date %> <%= author %>
+    </footer>
+</body>
+</html>
