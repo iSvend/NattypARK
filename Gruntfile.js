@@ -87,9 +87,12 @@ module.exports = function(grunt) {
                 'node_modules/fullpage.js/vendors/jquery.easings.min.js',
                 'node_modules/fullpage.js/vendors/jquery.slimscroll.min.js',
                 'node_modules/fullpage.js/vendors/velocity.min.js',
-                'node_modules/fullpage.js/jquery.fullPage.js'
+                'node_modules/fullpage.js/jquery.fullPage.js',
+                'vendor/angular-bootstrap-lightbox/dist/angular-bootstrap-lightbox.js'
             ],
-            css: ['node_modules/fullpage.js/jquery.fullPage.css'
+            css: [
+                'node_modules/fullpage.js/jquery.fullPage.css',
+                'vendor/angular-bootstrap-lightbox/dist/angular-bootstrap-lightbox.css'
             ],
             assets: [
             ]

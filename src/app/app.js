@@ -1,13 +1,13 @@
 (function (app) {
 
-	app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
-		$urlRouterProvider.otherwise('/');
-		$locationProvider.html5Mode(true);
-	});
+    app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
+        $urlRouterProvider.otherwise('/');
+        $locationProvider.html5Mode(true);
+    });
 
     app.run(function () { });
     app.controller('AppController', function ($scope) {
-
+        
     });
     app.controller('NavController', function ($scope, $location) {
         $scope.isCollapsed = true;
@@ -23,4 +23,5 @@
     'templates-common',
     'ui.router.state',
     'ui.router',
+    'bootstrapLightbox',
 ])));
