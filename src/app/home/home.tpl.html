@@ -1,9 +1,13 @@
 <div class="homeClass">
+    <div style="position:fixed;top:10px;left:10px;height:80px;">
+        <p>{{server.players}} / {{server.maxplayers}} Players Online</p>
+    </div>
     <div class="section active" id="section0">
         <div class="container" style="text-align:center;">
-            <h1 class="text-shadow hidden-xs"><a class="green h1" href="steam://connect/64.79.98.100:7808" target="_blank">64.79.98.100:7807</a></h1>
+            <h1 ng-if="server.is_online === '1'" class="text-shadow hidden-xs"><a class="green h1" href="steam://connect/64.79.98.100:7808" target="_blank">64.79.98.100:7807</a></h1>
             <img src="http://i.imgur.com/T71GvLX.png" class="img-responsive" style="position:relative;margin-top:-145px;z-index:-1;">
-            <h2 data-stellar-ratio="8" ng-bind="model.serverName"></h2>
+            <h2 ng-if="server.is_online === '1'" ng-bind="server.hostname"></h2>
+            <h2 ng-if="server.is_online !== '1'">We're currently down for maintenance. We'll be back up soon.</h2>
             <blink style="position:absolute;bottom:42px;"><i class="fa fa-5x fa-angle-double-down"></i></blink>
 
         </div>
@@ -28,7 +32,7 @@
                     </ul>
                     </h2>
                     <br>
-                    <a class="btn btn-lg btn-default" href="steam://connect/64.79.98.100:7808 " target="_blank
+                    <a ng-if="server.is_online === '1'" class="btn btn-lg btn-default" href="steam://connect/64.79.98.100:7808 " target="_blank
                 "><i class="fa fa-2x fa-steam-square "></i><span style="font-size:26px; "> Play Now!</span></a><p>* Steam must be running</p>
                 </div>
                 <div class="col-md-6 ">
@@ -71,7 +75,7 @@
             <br>
             <h2 style="font-size:3.5em;margin-top:20px; ">While Steam is running...<br>click this button to play.</h2>
             <br>
-            <a class="btn btn-lg btn-default " href="steam://connect/64.79.98.100:7808 " target="_blank "><i class="fa
+            <a ng-if="server.is_online === '1'" class="btn btn-lg btn-default " href="steam://connect/64.79.98.100:7808 " target="_blank "><i class="fa
                 fa-4x fa-steam-square "></i><span style="font-size:46px; "> Play Now!</span></a>
             </div>
         </div>

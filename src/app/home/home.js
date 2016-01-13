@@ -13,9 +13,17 @@
     
     // As you add controllers to a module and they grow in size, feel free to place them in their own files.
     //  Let each module grow organically, adding appropriate organization and sub-folders as needed.
-    module.controller('HomeController', function ($scope, Lightbox) {
+    module.controller('HomeController', function ($scope, $http, Lightbox) {
         // The top section of a controller should be lean and make it easy to see the "signature" of the controller
         //  at a glance.  All function definitions should be contained lower down.
+        $http.get('http://ark-servers.net/api/?object=servers&element=detail&key=pzgtf46r5aoen69dlhj724hmd4hutdizcv').success(function(data) {
+            $scope.server = data;
+            console.log($scope.server);
+        }).error(function(data, status, headers, config) {
+            //log error
+        });
+        
+        
         var model = this;
         model.serverName = '[US] Natty pARK [PVPVE] 3x Gather, Taming, XP';
         model.someList = ['Map - The Island', 'PVPVE', '3x Gather(Harvest)', '3x Faster Taming', '3x Experience'];
