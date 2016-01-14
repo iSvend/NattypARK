@@ -53,16 +53,7 @@
             </div>
         </div>
         <div class="section" id="section1">
-            <div class="container visible-xs">
-                <div class="jumbotron transparent details">
-                    <h1>Details</h1>
-                    <ul style="margin-left:20px; ">
-                        <li ng-repeat="item in someList ">
-                            <h3>{{item}}</h3></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="slide hidden-xs">
+            <div class="slide">
                 <div class="container">
                     <h1>Details</h1>
                     <div class="col-xs-12 col-md-6">
@@ -73,23 +64,30 @@
                     </ul>
                     </h2>
                         <br>
-                        <a ng-if="server.is_online==='1' " class="btn btn-lg btn-default " href="steam://connect/64.79.98.100:7808
+                        <a ng-if="server.is_online==='1' " class="hidden-xs btn btn-lg btn-default " href="steam://connect/64.79.98.100:7808
                     " target="_blank "><i class="fa fa-2x fa-steam-square "></i><span style="font-size:26px; "> Play Now!</span></a>
-                        <p>* Steam must be running</p>
+                        <p class="hidden-xs">* Steam must be running</p>
                     </div>
                     <div class="col-md-6">
                         <img src="/assets/dino.png " class="img-responsive ">
                     </div>
                 </div>
             </div>
-            <div class="slide hidden-xs" data-anchor="map" data-slideindex="2">
+            <div class="slide" data-anchor="map" data-slideindex="2">
                 <div class="container ">
-                    <div class="col-xs-12 col-md-6 v-center">
-                        <h1 style="margin-top:410px;font-size:3.5em;">Resource Map - The Island</h1>
+                    <div class="col-xs-12 col-md-6">
+                        <h1 style="font-size:3.5em;">Resource Map - The Island</h1>
                         <p>CLICK ON MAP TO ENLARGE</p>
+                        <ul class="visible-xs">
+                            <li ng-repeat="image in images " style="list-style:none;">
+                                <a ng-click="openLightboxModal($index) ">
+                                    <img ng-src="{{image.thumbUrl}} " class="img-responsive shadow ">
+                                </a>
+                            </li>
+                        </ul>
                     </div>
                     <div class="col-xs-12 col-md-6">
-                        <ul>
+                        <ul class="hidden-xs">
                             <li ng-repeat="image in images " style="list-style:none;">
                                 <a ng-click="openLightboxModal($index) ">
                                     <img ng-src="{{image.thumbUrl}} " class="img-responsive shadow ">
@@ -99,7 +97,7 @@
                     </div>
                 </div>
             </div>
-            <div class="slide hidden-xs" data-anchor="version" data-slideindex="3">
+            <div class="slide" data-anchor="version" data-slideindex="3">
                 <div class="container ">
                     <div class="col-xs-12">
                         <h1 style="margin-top:15%;font-size:3.5em;">Version Information</h1>
@@ -130,7 +128,7 @@
                 </div>
             </div>
         </div>
-        <div id="section3 " class="section ">
+        <div id="section3 " class="section hidden-xs">
             <div class="container ">
                 <div class="jumbotron transparent ">
                     <h1>play <i class="fa fa-terminal "></i></h1>
