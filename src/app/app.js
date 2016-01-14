@@ -10,8 +10,15 @@
         $http.get('http://ark-servers.net/api/?object=servers&element=detail&key=pzgtf46r5aoen69dlhj724hmd4hutdizcv').success(function(data) {
             $scope.server = data;
             console.log($scope.server);
-        }).error(function(data, status, headers, config) {
+        }).error(function(data) {
             //log error
+        });
+        
+        $http.get('https://api.ark.bar/v1/version').success(function(data) {
+            $scope.version = data;
+            console.log($scope.version);
+        }).error(function(data) {
+            //error
         });
 
         $scope.someList = ['Map - The Island', 'PVPVE', '3x Gather(Harvest)', '3x Faster Taming', '3x Experience'];
