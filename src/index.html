@@ -26,7 +26,7 @@
 					anchors: ['top', 'details', 'admin', 'play'],
                     sectionsColor: ['rgba(0,0,0,0.2)', 'rgba(215,20,0,.7)', '#1BBC9B', 'rgba(0,191,243,0.5)'],
 					menu: '#menu',
-					scrollingSpeed: 2000,
+					scrollingSpeed: 900,
                     responsiveWidth: 900,
                     navigation: true,
 				    navigationPosition: 'right'
@@ -37,10 +37,11 @@
 </head>
 
 <body>
+    <div style="position:fixed;top:10px;left:10px;height:80px;">
+        <p>{{server.players}} / {{server.maxplayers}} Players Online</p>
+    </div>
     <div id="fullpage" class="homeClass">
-        <div style="position:fixed;top:10px;left:10px;height:80px;">
-            <p>{{server.players}} / {{server.maxplayers}} Players Online</p>
-        </div>
+
         <div class="section active" id="section0">
             <div class="container" style="text-align:center;">
                 <h1 ng-if="server.is_online === '1'" class="text-shadow hidden-xs"><a class="green h1" href="steam://connect/64.79.98.100:7808" target="_blank">64.79.98.100:7807</a></h1>
@@ -101,20 +102,20 @@
             <div class="slide hidden-xs" data-anchor="version" data-slideindex="3">
                 <div class="container ">
                     <div class="col-xs-12">
-                    <div class="col-xs-12 col-md-6 v-center">
-                        <h1 style="margin-top:410px;font-size:3.5em;">Version Information</h1>
-                        <h3>Patches and updates get installed regularly in an effort to always be running the latest release. Those devs work their butts off to improve the game so I'll pass along the goodies as they come.</h3>
-                    </div>
-                    <div class="col-xs-12 col-md-6">
-                        <h2>
-                        <ul>
-                            <li>
-                                Current Release: {{version.current}}</li>
-                            <li>
-                                Upcoming Release: {{version.upcoming.version}}, ETA {{version.upcoming.status}}</li>
-                        </ul>
-                        </h2>
-                    </div>
+                        <h1 style="margin-top:15%;font-size:3.5em;">Version Information</h1>
+                        <div class="col-xs-12 col-md-6">
+                            <h2>
+                            <ul>
+                                <li>
+                                    Current Release: {{version.current}}</li>
+                                <li>
+                                    Upcoming Release: {{version.upcoming.version}}<br> {{version.upcoming.status}}</li>
+                            </ul>
+                            </h2>
+                        </div>
+                        <div class="col-md-6">
+                            <h3>Patches and updates get installed regularly in an effort to always be running the latest release. Those devs work their butts off to improve the game so I'll pass along the goodies as they come.</h3>
+                        </div>
                     </div>
                 </div>
             </div>
