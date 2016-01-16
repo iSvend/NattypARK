@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="<%=appName%>" ng-controller="AppController">
+<html ng-app="NattypARK" ng-controller="AppController">
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,16 +9,20 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 
     <!-- compiled CSS -->
-    <% styles.forEach( function ( file ) { %>
-        <link rel="stylesheet" type="text/css" href="<%= file %>" />
-        <% }); %>
+    
+        <link rel="stylesheet" type="text/css" href="node_modules/fullpage.js/jquery.fullPage.css" />
+        
+        <link rel="stylesheet" type="text/css" href="vendor/angular-bootstrap-lightbox/dist/angular-bootstrap-lightbox.css" />
+        
+        <link rel="stylesheet" type="text/css" href="assets/NattypARK-0.0.1.css" />
+        
             <link rel='stylesheet' type='text/css' href='https://fonts.googleapis.com/css?family=Orbitron:900'>
             <link rel='stylesheet' type='text/css' href='https://fonts.googleapis.com/css?family=Play:400'>
             <!-- compiled JavaScript -->
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-            <% scripts.forEach( function ( file ) { %>
-                <script type="text/javascript" src="<%= file %>"></script>
-                <% }); %>
+            
+                <script type="text/javascript" src="assets/NattypARK-0.0.1.js"></script>
+                
                     <script type="text/javascript">
                         $(document).ready(function() {
 				$('#fullpage').fullpage({
@@ -44,7 +48,7 @@
 
         <div class="section active" id="section0">
             <div class="container" style="text-align:center;">
-                <h1 ng-if="server.is_online === '1'" class="text-shadow hidden-xs"><a class="green h1" href="steam://connect/64.79.98.100:7808" target="_blank">64.79.98.100:7807</a></h1>
+                <h1 ng-if="server.is_online === '1'" class="text-shadow hidden-xs"><a class="green h1" href="steam://connect/64.79.98.100:7808">64.79.98.100:7807</a></h1>
                 <img src="http://res.cloudinary.com/isvend/image/upload/v1452907357/logo_k8dynz.png" class="img-responsive" style="position:relative;margin-top:-145px;z-index:-1;">
                 <h2 ng-if="server.is_online === '1'" ng-bind="server.hostname"></h2>
                 <h2 ng-if="server.is_online !== '1'">We're currently down for maintenance. We'll be back up soon.</h2>
@@ -64,8 +68,7 @@
                     </ul>
                     </h2>
                         <br>
-                        <a ng-if="server.is_online==='1' " class="hidden-xs btn btn-lg btn-default " href="steam://connect/64.79.98.100:7808
-                    " target="_blank "><i class="fa fa-2x fa-steam-square "></i><span style="font-size:26px; "> Play Now!</span></a>
+                        <a ng-if="server.is_online==='1' " class="hidden-xs btn btn-lg btn-default " href="steam://connect/64.79.98.100:7808"><i class="fa fa-2x fa-steam-square "></i><span style="font-size:26px; "> Play Now!</span></a>
                         <p class="hidden-xs">* Steam must be running</p>
                     </div>
                     <div class="col-md-6">
@@ -128,14 +131,14 @@
                 </div>
             </div>
         </div>
-        <div id="section3" class="section hidden-xs">
+        <div ng-if="server.is_online==='1' " id="section3" class="section hidden-xs">
             <div class="container ">
                 <div class="jumbotron transparent ">
                     <h1>play <i class="fa fa-terminal "></i></h1>
                     <br>
                     <h2 style="font-size:3.5em;margin-top:20px; ">While Steam is running...<br>click this button to play.</h2>
                     <br>
-                    <a ng-if="server.is_online==='1' " class="btn btn-lg btn-default " href="steam://connect/64.79.98.100:7808
+                    <a class="btn btn-lg btn-default " href="steam://connect/64.79.98.100:7808
                     " target="_blank "><i class="fa fa-4x fa-steam-square "></i><span style="font-size:46px; "> Play Now!</span></a>
                 </div>
             </div>
@@ -144,8 +147,8 @@
 
     <footer class="container ">
         (c)
-        <%= date %>
-            <%= author %>
+        2016
+            Svend Knutsen
     </footer>
 </body>
 
