@@ -21,7 +21,7 @@
             //error
         });
 
-        $scope.someList = ['Map - The Island', 'PVPVE', '3x Gather(Harvest)', '3x Faster Taming', '3x Experience'];
+        $scope.someList = ['Map - The Island', 'PVPVE', '5x Gather(Harvest)', '5x Faster Taming', '5x Experience'];
 
         init();
         
