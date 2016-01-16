@@ -33,9 +33,9 @@
 
         $scope.images = [
             {
-                'url': '/assets/resource_map.jpg',
+                'url': 'http://res.cloudinary.com/isvend/image/upload/v1452907506/resource_map_vqt3am.jpg',
                 'caption': 'The Island Resource Map',
-                'thumbUrl': '/assets/resource_map.jpg' // used only for this example
+                'thumbUrl': 'http://res.cloudinary.com/isvend/image/upload/v1452907506/resource_map_vqt3am.jpg' // used only for this example
             }
         ];
 
