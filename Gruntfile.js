@@ -88,7 +88,9 @@ module.exports = function(grunt) {
                 'node_modules/fullpage.js/vendors/jquery.slimscroll.min.js',
                 'node_modules/fullpage.js/vendors/velocity.min.js',
                 'node_modules/fullpage.js/jquery.fullPage.js',
-                'vendor/angular-bootstrap-lightbox/dist/angular-bootstrap-lightbox.js'
+                'vendor/angular-bootstrap-lightbox/dist/angular-bootstrap-lightbox.js',
+                'vendor/firebase/firebase.js',
+                'vendor/angularfire/dist/angularfire.min.js'
             ],
             css: [
                 'node_modules/fullpage.js/jquery.fullPage.css',

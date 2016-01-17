@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="NattypARK" ng-controller="AppController">
+<html ng-app="<%=appName%>" ng-controller="AppController">
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,20 +9,20 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 
     <!-- compiled CSS -->
-    
-        <link rel="stylesheet" type="text/css" href="node_modules/fullpage.js/jquery.fullPage.css" />
-        
-        <link rel="stylesheet" type="text/css" href="vendor/angular-bootstrap-lightbox/dist/angular-bootstrap-lightbox.css" />
-        
-        <link rel="stylesheet" type="text/css" href="assets/NattypARK-0.0.1.css" />
-        
+
+    <% styles.forEach( function ( file ) { %>
+        <link rel="stylesheet" type="text/css" href="<%= file %>" />
+        <% }); %>
+
             <link rel='stylesheet' type='text/css' href='https://fonts.googleapis.com/css?family=Orbitron:900'>
             <link rel='stylesheet' type='text/css' href='https://fonts.googleapis.com/css?family=Play:400'>
             <!-- compiled JavaScript -->
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-            
-                <script type="text/javascript" src="assets/NattypARK-0.0.1.js"></script>
-                
+
+            <% scripts.forEach( function ( file ) { %>
+                <script type="text/javascript" src="<%= file %>"></script>
+                <% }); %>
+
                     <script type="text/javascript">
                         $(document).ready(function() {
 				$('#fullpage').fullpage({
@@ -120,6 +120,36 @@
                     </div>
                 </div>
             </div>
+            <div id="chatslide" class="slide" data-anchor="messages" data-slideindex="4">
+                <div class="container">
+                    <div class="col-xs-12">
+                        <div ng-controller="chatCtrl" class="chatArea row">
+                            <div class=" chatText">
+
+                                <p ng-repeat="message in messages">
+                                    {{message.user}}: <span style="color:#ccff99;">{{message.text}}</span>
+                                </p>
+
+                            </div>
+                            <form>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">Survivor </div>
+                                        <input type="text" class="form-control" id="Name" placeholder="Your Name" ng-model="newmessage.user">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">Message </div>
+                                        <textarea rows="3" class="form-control" id="Text" placeholder="Type your message" ng-model="newmessage.text"></textarea>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-default" onclick="this.form.reset();" ng-click="inserisci(newmessage)">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="section " id="section2">
             <div class="container ">
@@ -146,9 +176,7 @@
     </div>
 
     <footer class="container ">
-        (c)
-        2016
-            Svend Knutsen
+        (c) 2016 Svend Knutsen
     </footer>
 </body>
 

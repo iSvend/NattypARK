@@ -12,7 +12,9 @@
   },
   "dependencies": {
     "angular-bootstrap-lightbox": "~0.10.0",
-    "angular-bootstrap": "~1.0.0"
+    "angular-bootstrap": "~1.0.0",
+    "firebase": "~2.3.2",
+    "angularfire": "~1.1.3"
   },
   "resolutions": {
     "angular": "1.3.15",
