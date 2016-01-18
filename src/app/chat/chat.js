@@ -91,14 +91,24 @@
             $scope.alert = {};
         }
     ]);
-    
-    
+
+
     module.controller('chatCtrl', ['$scope', 'Message', 'Auth', function ($scope, Message, Auth) {
+        $scope.auth = Auth;
+        // any time auth status updates, add the user data to scope
+        $scope.auth.$onAuth(function (authData) {
+            $scope.authData = authData;
+        });
         $scope.user = "Guest";
 
         $scope.messages = Message.all;
 
+        $scope.reset = function (eraseText) {
+            document.getElementById("Text").value = "";
+        };
+
         $scope.inserisci = function (message) {
+            $scope.newmessage.user = $scope.authData.password.email;
             Message.create(message);
         };
     }]);
