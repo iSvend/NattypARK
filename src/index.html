@@ -9,16 +9,16 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 
     <!-- compiled CSS -->
-
     <% styles.forEach( function ( file ) { %>
         <link rel="stylesheet" type="text/css" href="<%= file %>" />
         <% }); %>
 
             <link rel='stylesheet' type='text/css' href='https://fonts.googleapis.com/css?family=Orbitron:900'>
             <link rel='stylesheet' type='text/css' href='https://fonts.googleapis.com/css?family=Play:400'>
-            <!-- compiled JavaScript -->
+
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 
+            <!-- compiled JavaScript -->
             <% scripts.forEach( function ( file ) { %>
                 <script type="text/javascript" src="<%= file %>"></script>
                 <% }); %>
@@ -122,57 +122,81 @@
             </div>
             <div id="chatslide" class="slide" data-anchor="messages" data-slideindex="4">
                 <div class="container">
-                    <div class="col-xs-12">
-                        <div ng-controller="chatCtrl" class="chatArea row">
-                            <div class=" chatText">
-
-                                <p ng-repeat="message in messages">
-                                    {{message.user}}: <span style="color:#ccff99;">{{message.text}}</span>
-                                </p>
-
+                    <form id="auth" class="navbar-form navbar-right collapse navbar-collapse" ng-controller="AuthCtrl">
+                        <fieldset ng-hide="auth.user">
+                            <div class="form-group">
+                                <input type="email" class="form-control" placeholder="email" ng-model="email" />
                             </div>
-                            <form>
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <div class="input-group-addon">Survivor </div>
-                                        <input type="text" class="form-control" id="Name" placeholder="Your Name" ng-model="newmessage.user">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <div class="input-group-addon">Message </div>
-                                        <textarea rows="3" class="form-control" id="Text" placeholder="Type your message" ng-model="newmessage.text"></textarea>
-                                    </div>
-                                </div>
-                                <button type="submit" class="btn btn-default" onclick="this.form.reset();" ng-click="inserisci(newmessage)">Submit</button>
-                            </form>
+                            <div class="form-group">
+                                <input type="password" class="form-control" placeholder="password" ng-model="password" />
+                            </div>
+                            <button type="submit" class="btn btn-default" ng-click="signIn()">Sign In / Sign Up</button>
+                        </fieldset>
+                        <span ng-show="auth.user">
+          {{auth.user.name}}
+          <button type="submit" class="btn btn-default" ng-click="auth.$logout()">Sign Out</button>
+        </span>
+                    </form>
+                    <p id="signed_in_as" class="navbar-text navbar-right" ng-show="auth.user">Signed in as {{auth.user.email}}</p>
+                </div>
+                </nav>
+
+                <div class="container" ng-controller="AlertCtrl">
+                    <div class="alert alert-{{alert.class}}" ng-model="alert.message" ng-show="alert.message">
+                        {{alert.message}}
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <div ng-controller="chatCtrl" class="chatArea row">
+                        <div class=" chatText">
+
+                            <p ng-repeat="message in messages">
+                                {{message.user}}: <span style="color:#ccff99;">{{message.text}}</span>
+                            </p>
+
                         </div>
+                        <form>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-addon">Survivor </div>
+                                    <input type="text" class="form-control" id="Name" placeholder="Your Name" ng-model="newmessage.user">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-addon">Message </div>
+                                    <textarea rows="3" class="form-control" id="Text" placeholder="Type your message" ng-model="newmessage.text"></textarea>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-default" onclick="this.form.reset();" ng-click="inserisci(newmessage)">Submit</button>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="section " id="section2">
-            <div class="container ">
-                <div class="jumbotron transparent ">
-                    <h1>about the admin <i class="fa fa-terminal "></i></h1>
-                    <h3>I like to make things... like this website. <br>
+    </div>
+    <div class="section " id="section2">
+        <div class="container ">
+            <div class="jumbotron transparent ">
+                <h1>about the admin <i class="fa fa-terminal "></i></h1>
+                <h3>I like to make things... like this website. <br>
             I also like games... and building stuff.<br>
             Let's build things and play ARK.</h3>
-                </div>
             </div>
         </div>
-        <div ng-if="server.is_online==='1' " id="section3" class="section hidden-xs">
-            <div class="container ">
-                <div class="jumbotron transparent ">
-                    <h1>play <i class="fa fa-terminal "></i></h1>
-                    <br>
-                    <h2 style="font-size:3.5em;margin-top:20px; ">While Steam is running...<br>click this button to play.</h2>
-                    <br>
-                    <a class="btn btn-lg btn-default " href="steam://connect/64.79.98.100:7808
+    </div>
+    <div ng-if="server.is_online==='1' " id="section3" class="section hidden-xs">
+        <div class="container ">
+            <div class="jumbotron transparent ">
+                <h1>play <i class="fa fa-terminal "></i></h1>
+                <br>
+                <h2 style="font-size:3.5em;margin-top:20px; ">While Steam is running...<br>click this button to play.</h2>
+                <br>
+                <a class="btn btn-lg btn-default " href="steam://connect/64.79.98.100:7808
                     " target="_blank "><i class="fa fa-4x fa-steam-square "></i><span style="font-size:46px; "> Play Now!</span></a>
-                </div>
             </div>
         </div>
+    </div>
     </div>
 
     <footer class="container ">
