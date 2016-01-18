@@ -48,17 +48,7 @@
             <div class="navbar-header">
                 <p>{{server.players}} / {{server.maxplayers}} Players Online</p>
             </div>
-            <form ng-hide="authData" id="auth" class="navbar-form navbar-right" ng-controller="AuthCtrl">
-                <fieldset ng-hide="auth.user">
-                    <div class="form-group">
-                        <input type="email" class="form-control" placeholder="email" ng-model="email" />
-                    </div>
-                    <div class="form-group">
-                        <input type="password" class="form-control" placeholder="password" ng-model="password" />
-                    </div>
-                    <button type="submit" class="btn btn-default" ng-click="login()">Sign In / Sign Up</button>
-                </fieldset>
-            </form>
+
             <form class="navbar-form navbar-right" ng-controller="AuthCtrl" ng-show="authData">
                 <p>Hello {{authData.password.email}}
                     <button ng-click="logout(); isCollapsed = !isCollapsed" type="submit" class="btn btn-primary navbar-btn">Logout</button>
@@ -152,7 +142,20 @@
             <div id="chatslide" class="slide" data-anchor="messages" data-slideindex="4">
                 <div class="container">
                     <div class="col-xs-12">
-                        <div ng-controller="chatCtrl" class="chatArea row">
+                        <form ng-hide="authData" id="auth" class="navbar-form" ng-controller="AuthCtrl">
+                            <h2>Message Board</h2>
+                            <h3>Sign in or register to chat.</h3>
+                            <fieldset ng-hide="auth.user">
+                                <div class="form-group">
+                                    <input type="email" class="form-control" placeholder="email" ng-model="email" />
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" class="form-control" placeholder="password" ng-model="password" />
+                                </div>
+                                <button type="submit" class="btn btn-default" ng-click="login()">Sign In / Sign Up</button>
+                            </fieldset>
+                        </form>
+                        <div ng-show="authData" ng-controller="chatCtrl" class="chatArea row">
                             <div class=" chatText">
 
                                 <p ng-repeat="message in messages">
