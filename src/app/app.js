@@ -52,7 +52,35 @@
         });
     });
 
-    
+    app.controller('chatCtrl', ['$scope', 'Message', function ($scope, Message) {
+        $scope.user="Guest";
+ 
+		$scope.messages= Message.all;
+ 
+		$scope.inserisci = function(message){
+			Message.create(message);
+		};
+    }]);
+
+    app.factory('Message', ['$firebaseArray',
+        function ($firebaseArray) {
+            var ref = new Firebase('https://torrid-inferno-978.firebaseio.com');
+            var messages = $firebaseArray(ref.child('messages'));
+            var Message = {
+                all: messages,
+                create: function (message) {
+                    return messages.$add(message);
+                },
+                get: function (messageId) {
+                    return $firebaseObject(ref.child('messages').child(messageId));
+                },
+                delete: function (message) {
+                    return messages.$remove(message);
+                }
+            };
+            return Message;
+        }
+    ]);
 
     app.directive('blink', function ($timeout) {
         return {
@@ -82,6 +110,5 @@
     'ui.router.state',
     'ui.router',
     'bootstrapLightbox',
-    'firebase',
-    'NattypARK.chat'
+    'firebase'
 ])));
