@@ -22,8 +22,8 @@
             <% scripts.forEach( function ( file ) { %>
                 <script type="text/javascript" src="<%= file %>"></script>
                 <% }); %>
-<!-- Firebase simple login -->
-<script src='https://cdn.firebase.com/v0/firebase-simple-login.js'></script>
+                    <!-- Firebase simple login -->
+                    <script src='https://cdn.firebase.com/v0/firebase-simple-login.js'></script>
 
                     <script type="text/javascript">
                         $(document).ready(function() {
@@ -48,7 +48,7 @@
             <div class="navbar-header">
                 <p>{{server.players}} / {{server.maxplayers}} Players Online</p>
             </div>
-            <form id="auth" class="navbar-form navbar-right" ng-controller="AuthCtrl">
+            <form ng-hide="authData" id="auth" class="navbar-form navbar-right" ng-controller="AuthCtrl">
                 <fieldset ng-hide="auth.user">
                     <div class="form-group">
                         <input type="email" class="form-control" placeholder="email" ng-model="email" />
@@ -56,14 +56,17 @@
                     <div class="form-group">
                         <input type="password" class="form-control" placeholder="password" ng-model="password" />
                     </div>
-                    <button type="submit" class="btn btn-default" ng-click="signIn()">Sign In / Sign Up</button>
+                    <button type="submit" class="btn btn-default" ng-click="login()">Sign In / Sign Up</button>
                 </fieldset>
-                <span ng-show="auth.user">{{auth.user.name}}<button type="submit" class="btn btn-default" ng-click="auth.$logout()">Sign Out</button></span>
             </form>
-            <p id="signed_in_as" class="navbar-text navbar-right" ng-show="auth.user">Signed in as {{auth.user.email}}</p>
-
+            <form class="navbar-form navbar-right" ng-controller="AuthCtrl" ng-show="authData">
+                <p>Hello {{authData.password.email}}
+                    <button ng-click="logout(); isCollapsed = !isCollapsed" type="submit" class="btn btn-primary navbar-btn">Logout</button>
+                </p>
+            </form>
         </div>
     </nav>
+
     <div class="container" ng-controller="AlertCtrl">
         <div class="alert alert-{{alert.class}}" ng-model="alert.message" ng-show="alert.message">
             {{alert.message}}

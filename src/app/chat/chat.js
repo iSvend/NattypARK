@@ -3,7 +3,12 @@
     // As you add controllers to a module and they grow in size, feel free to place them in their own files.
     //  Let each module grow organically, adding appropriate organization and sub-folders as needed.
     
-    
+    module.factory("Auth", ["$firebaseAuth",
+        function ($firebaseAuth) {
+            var ref = new Firebase("https://torrid-inferno-978.firebaseio.com");
+            return $firebaseAuth(ref);
+        }
+    ]);
 
 
     module.factory('Message', ['$firebaseArray',
@@ -27,28 +32,20 @@
     ]);
 
 
-    module.controller('chatCtrl', ['$scope', 'Message', function ($scope, Message) {
-        $scope.user = "Guest";
-
-        $scope.messages = Message.all;
-
-        $scope.inserisci = function (message) {
-            Message.create(message);
-        };
-    }]);
-
     module.controller('AuthCtrl', [
-        '$scope', '$rootScope', '$firebaseAuth', function ($scope, $rootScope, $firebaseAuth) {
-            var ref = new Firebase('https://torrid-inferno-978.firebaseio.com');
-            $rootScope.auth = $firebaseAuth(ref);
+        '$scope', 'Auth', function ($scope, Auth) {
 
-            $scope.signIn = function () {
-                $rootScope.auth.$login('password', {
+            $scope.login = function () {
+                $scope.authData = null;
+                $scope.error = null;
+
+                Auth.$authWithPassword({
                     email: $scope.email,
                     password: $scope.password
-                }).then(function (user) {
-                    $rootScope.alert.message = '';
-                }, function (error) {
+                }).then(function (authData) {
+                    //$scope.message = "User logged in with uid: " + authData.uid;
+                    console.log('Logged in with uid:' + authData.uid);
+                }).catch(function (error) {
                     if (error = 'INVALID_EMAIL') {
                         console.log('email invalid or not signed up — trying to sign you up!');
                         $scope.signUp();
@@ -60,13 +57,29 @@
                 });
             };
 
+            $scope.auth = Auth;
+            
+            // redirect after log out
+            $scope.logout = function () {
+                Auth.$unauth();
+                console.log('Logged out');
+            };
+        
+            // any time auth status updates, add the user data to scope
+            $scope.auth.$onAuth(function (authData) {
+                $scope.authData = authData;
+            });
+
             $scope.signUp = function () {
-                $rootScope.auth.$createUser($scope.email, $scope.password, function (error, user) {
+                Auth.$createUser({
+                    email: $scope.email,
+                    password: $scope.password
+                }, function (error, user) {
                     if (!error) {
-                        $rootScope.alert.message = '';
+                        alert.message = '';
                     } else {
-                        $rootScope.alert.class = 'danger';
-                        $rootScope.alert.message = 'The username and password combination you entered is invalid.';
+                        alert.class = 'danger';
+                        alert.message = 'The username and password combination you entered is invalid.';
                     }
                 });
             };
@@ -74,10 +87,21 @@
     ]);
 
     module.controller('AlertCtrl', [
-        '$scope', '$rootScope', function ($scope, $rootScope) {
-            $rootScope.alert = {};
+        '$scope', function ($scope) {
+            $scope.alert = {};
         }
     ]);
+    
+    
+    module.controller('chatCtrl', ['$scope', 'Message', 'Auth', function ($scope, Message, Auth) {
+        $scope.user = "Guest";
+
+        $scope.messages = Message.all;
+
+        $scope.inserisci = function (message) {
+            Message.create(message);
+        };
+    }]);
 
 
     // The name of the module, followed by its dependencies (at the bottom to facilitate enclosure)
