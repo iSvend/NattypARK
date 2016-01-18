@@ -6,7 +6,7 @@
     });
 
     app.run(function () { });
-    app.controller('AppController', function ($scope, $http, Lightbox) {
+    app.controller('AppController', function ($scope, $rootScope, $http, Lightbox) {
         $http.get('http://ark-servers.net/api/?object=servers&element=detail&key=pzgtf46r5aoen69dlhj724hmd4hutdizcv').success(function (data) {
             $scope.server = data;
             console.log($scope.server);
