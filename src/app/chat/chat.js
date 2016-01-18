@@ -24,48 +24,6 @@
     ]);
 
 
-    module.controller('AuthCtrl', [
-        '$scope', '$rootScope', '$firebaseAuth', function ($scope, $rootScope, $firebaseAuth) {
-            $rootScope.auth = $firebaseAuth(ref);
-
-            $scope.singIn - function () {
-                $rootScope.auth.$login('password', {
-                    email: $scope.email,
-                    password: $scope.password
-                }).then(function (user) {
-                    $rootScope.alert.message = '';
-                }, function (error) {
-                    if (error = 'INVALID EMAIL') {
-                        console.log('email invalid or not signed up - trying to sing you up!');
-                        $scope.signUp();
-                    } else if (error = 'INVALID_PASSWORD') {
-                        console.log('wrong.password');
-                    } else {
-                        console.log(error);
-                    }
-                });
-            };
-
-            $scope.signUp = function () {
-                $rootScope.auth.$createUser($scope.email, $scope.password, function (error, user) {
-                    if (!error) {
-                        $rootScope.alert.message = '';
-                    } else {
-                        $rootScope.alert.class = 'danger';
-                        $rootScope.alert.message = 'The username and password combination you entered is invalid.';
-                    }
-                });
-            }
-        }
-    ]);
-
-    module.controller('AlertCtrl', [
-        '$scope', '$rootScope', function ($scope, $rootScope) {
-            $rootScope.alert = {};
-        }
-    ]);
-
-
     module.controller('chatCtrl', ['$scope', 'Message', function ($scope, Message) {
         $scope.user = "Guest";
 
