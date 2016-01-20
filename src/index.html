@@ -160,7 +160,7 @@
                             <div class=" chatText">
 
                                 <p ng-repeat="message in messages">
-                                    {{message.alias}}: <span style="color:#ccff99;">{{message.text}}</span>
+                                    <span ng-if="message.alias != null">{{message.alias}}</span><span ng-if="message.alias == null">{{authData.password.email}}</span>: <span style="color:#ccff99;">{{message.text}}</span>
                                 </p>
 
                             </div>
