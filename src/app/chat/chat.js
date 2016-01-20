@@ -48,7 +48,7 @@
                 }).catch(function (error) {
                     if (error = 'INVALID_EMAIL') {
                         console.log('email invalid or not signed up — trying to sign you up!');
-                        $scope.signUp();
+                        //$scope.signUp();
                     } else if (error = 'INVALID_PASSWORD') {
                         console.log('wrong password!');
                     } else {
